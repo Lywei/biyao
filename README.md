@@ -1,2 +1,8 @@
 # spider-demo
-python scrapy 入门例子
+python start demo
+
+
+### 1、create spider
+```
+scrapy startproject biayo
+```
