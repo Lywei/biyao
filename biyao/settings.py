@@ -21,10 +21,19 @@ NEWSPIDER_MODULE = 'biyao.spiders'
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
 ITEM_PIPELINES = {
-    'biyao.pipelines.JsonWithEncodingCnblogsPipeline': 300,
+   # 'biyao.pipelines.JsonWithEncodingCnblogsPipeline': 300,
+    'biyao.pipelines.MySQLStorePipeline': 400,
 }
-LOG_LEVEL = 'INFO'
+LOG_LEVEL = 'DEBUG'
 COOKIES_ENABLED = True
+
+
+# start MySQL database configure setting
+MYSQL_HOST = 'localhost'
+MYSQL_DBNAME = 'biyao'
+MYSQL_USER = 'root'
+MYSQL_PASSWD = '123456'
+# end of MySQL database configure setting
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
