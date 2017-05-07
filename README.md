@@ -4,5 +4,5 @@ python start demo
 
 ### 1、create spider
 ```
-scrapy startproject biayo
+scrapy startproject biyao
 ```
