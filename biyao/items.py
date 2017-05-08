@@ -11,4 +11,5 @@ class BiyaoItem(Item):
     price = Field()
     link = Field()
     image = Field()
+    category = Field()
     pass

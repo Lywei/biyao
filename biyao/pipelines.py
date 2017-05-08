@@ -37,7 +37,6 @@ url = "127.0.0.1"
 dbname = "biyao"
 username = "root"
 password = "123456"
-charset = "utf-8"
 
 class MySQLStorePipeline(object):
 
@@ -52,13 +51,14 @@ class MySQLStorePipeline(object):
 
 	def process_item(self, item, spider):
 		try:
-			self.cursor.execute("""INSERT INTO goods (name,price,link,image)
-							VALUES (%s, %s, %s, %s)""",
+			self.cursor.execute("""INSERT INTO goods (name,price,link,image,category)
+							VALUES (%s, %s, %s, %s,%s)""",
 							(
 								item['name'],
 								item['price'],
 								item['link'],
-								item['image']
+								item['image'],
+								item['category']
 							)
 			)
 			self.conn.commit()

@@ -10,7 +10,9 @@ from scrapy.contrib.linkextractors.sgml import SgmlLinkExtractor
 
 class Douban(CrawlSpider):
     name = "biyao"
-    start_urls = ['http://www.biyao.com/classify/category.html?categoryId=1']
+    start_urls = [
+        'http://www.biyao.com/classify/category.html?categoryId=%s' % p for p in xrange(1,300)
+        ]
     rules = (
         Rule(SgmlLinkExtractor(allow=("category.html", )), callback='parse',follow = True),
         Rule(SgmlLinkExtractor(allow=('category', )), callback='parse'),
@@ -20,6 +22,7 @@ class Douban(CrawlSpider):
         response = Selector(response)
         ul = response.xpath("//*[@class='category-list']/li")
         items = []
+        category  = response.xpath("//div[@class='category-title']/dl/dt/text()").extract()[0]
         for li in ul:
             item = BiyaoItem()
             name = li.xpath("dl/dt/text()").extract()
@@ -30,22 +33,6 @@ class Douban(CrawlSpider):
             item["price"] = price
             item["link"] = link
             item["image"] = image
+            item["category"] = category
             items.append(item)
         return items
-
-
-    #  
-    #   <td>amazon</td>
-    #  
-    # def parse(self,response):
-    #     response = Selector(response)
-    #     container  = response.xpath("//div[@class='s-item-container']")
-    #     items = []
-    #     for e in container :
-    #         name = e.xpath("//h2/text()").extract()
-    #         item = BiyaoItem()
-    #         item["name"] = name
-    #         print name
-    #         items.append(item)
-    #     return items
-        
